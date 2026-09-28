@@ -1,0 +1,51 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-md-6">
+
+        <div class="card">
+
+            <div class="card-body text-center">
+
+                <h3>Delete Task</h3>
+
+                <p>
+                    Are you sure you want to delete
+                    <strong>{{ task.title }}</strong>?
+                </p>
+
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="btn btn-danger"
+                    >
+                        Yes, Delete
+                    </button>
+
+
+                    <a
+                        href="{% url 'task_list' %}"
+                        class="btn btn-secondary"
+                    >
+                        Cancel
+                    </a>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

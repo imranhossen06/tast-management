@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-md-7">
+
+        <div class="card">
+
+            <div class="card-header">
+
+                {% if task %}
+                    <h3>Update Task</h3>
+                {% else %}
+                    <h3>Create Task</h3>
+                {% endif %}
+
+            </div>
+
+
+            <div class="card-body">
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+
+                    <div class="mb-3">
+
+                        <label>Title</label>
+
+                        <input
+                            type="text"
+                            name="title"
+                            class="form-control"
+                            value="{{ task.title|default:'' }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <label>Description</label>
+
+                        <textarea
+                            name="description"
+                            class="form-control"
+                            rows="5"
+                        >{{ task.description|default:'' }}</textarea>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <label>Status</label>
+
+                        <select
+                            name="status"
+                            class="form-select"
+                        >
+
+                            <option value="Pending"
+                                {% if task.status == 'Pending' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Pending
+                            </option>
+
+
+                            <option value="In Progress"
+                                {% if task.status == 'In Progress' %}
+                                    selected
+                                {% endif %}
+                            >
+                                In Progress
+                            </option>
+
+
+                            <option value="Completed"
+                                {% if task.status == 'Completed' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Completed
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-success"
+                    >
+                        Save
+                    </button>
+
+
+                    <a
+                        href="{% url 'task_list' %}"
+                        class="btn btn-secondary"
+                    >
+                        Cancel
+                    </a>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
